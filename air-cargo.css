@@ -48,7 +48,8 @@ input[type=reset]:hover {
     width: 30%;
     color: white;
     padding: 14px 20px;
-    margin: 15px;
+    box-shadow: 0 0 1em rgb(158, 158, 158);
+    margin: 25px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -62,6 +63,18 @@ input[type=reset]:hover {
 }
 .formContent{
     margin-left: 20px;
+}
+.changePayload{
+    background-color: #ffffff;
+    font-size: 20px;
+    border-radius: 35px;
+    cursor: pointer;
+    border: 2px solid lightgray;
+}
+.changePayload:hover{
+    border: 2px solid darkorange;
+    background-color: orange;
+    color: white;
 }
 
 /* Ids */
@@ -77,7 +90,8 @@ input[type=reset]:hover {
 }
 #headerBackground{
     background-color: rgba(240, 248, 255, 0.445);
-    max-width: 30%;
+    min-width: 200px;
+    max-width: 35%;
     text-align: center;
     height: 80%;
     padding-bottom: 10px;
@@ -93,7 +107,7 @@ input[type=reset]:hover {
     font-weight: bold;
 }
 #orderPageTitle{
-    background-color: orange;
+    background-color: rgb(255, 198, 93);
     font-size: 3vmax;
     padding-top: 4px;
     padding-bottom: 12px;
@@ -104,21 +118,13 @@ input[type=reset]:hover {
     width: 90%;
 }
 #addPayload{
-    background-color: #ffffff;
-    font-size: 20px;
     margin-top: 10px;
     margin-left: 35px;
-    border-radius: 35px;
-    cursor: pointer;
-    border: 2px solid lightgray;
 }
-#addPayload:hover{
-    border: 2px solid darkorange;
-    background-color: orange;
-    color: white;
-}
-#addPayloadDescription{
-    font-size: 20px;
+#removePayload{
+    padding-left: 9px;
+    padding-right: 9px;
+    font-weight: bold;
 }
 #formTable{
     height: 40vmax;
