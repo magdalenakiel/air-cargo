@@ -223,8 +223,6 @@ class DatePicker extends HTMLElement {
     if(this.visible) {
       this.calendarDateElement.focus();
     } else {
-      this.toggleButton.focus();
-      
       if(!this.isCurrentCalendarMonth()) {
         this.calendar.goToDate(this.date.monthNumber, this.date.year);
         this.renderCalendarDays();
@@ -257,7 +255,7 @@ class DatePicker extends HTMLElement {
   }
   selectDay(el, day) {
     if(day.isEqualTo(this.date)) return;
-    
+    if(day.dayNumber == 1 || day.dayNumber == 7) return;
     this.date = day;
     
     if(day.monthNumber !== this.calendar.month.number) {
@@ -298,7 +296,7 @@ class DatePicker extends HTMLElement {
   }
   updateToggleText() {
     const date = this.date.format(this.format)
-    this.toggleButton.textContent = date;
+    this.toggleButton.value = date;
   }
   updateMonthDays() {
     this.calendarDaysContainer.innerHTML = '';
@@ -311,6 +309,9 @@ class DatePicker extends HTMLElement {
       el.setAttribute('aria-label', day.format(this.format));  
       if(day.monthNumber === this.calendar.month.number) {
         el.classList.add('current');
+      }
+      if(day.dayNumber == 1 || day.dayNumber == 7) {
+        el.classList.add('day-disabled');
       }
       if(this.isSelectedDate(day)) {
         el.classList.add('selected');
@@ -335,7 +336,7 @@ class DatePicker extends HTMLElement {
     const date = this.date.format(this.format)
     this.shadow.innerHTML = `
       <link rel="stylesheet" href="dataPicker.css">
-      <button type="button" class="date-toggle">${date}</button>
+      <input type="text" id="chosenDate" class="date-toggle" value="${date}" readonly>
       <div class="calendar-dropdown ${this.visible ? 'visible' : ''} ${this.position}">
         <div class="header">
             <button type="button" class="prev-month" aria-label="previous month"></button>

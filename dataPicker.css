@@ -12,7 +12,7 @@
 }
 .date-toggle {
   padding: 8px 15px;
-  width: 86%;
+  width: 79%;
   border: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -23,6 +23,7 @@
   font-size: 20px;
   font-weight: bold;
   text-transform: capitalize;
+  cursor: default;
 }
 
 .calendar-dropdown {
@@ -35,9 +36,7 @@
   left: 47%;
   transform: translate(-50%, 8px);
   padding: 20px;
-  /* background: #fff; */
   border-radius: 5px;
-  /* box-shadow: 0 0 8px rgba(0,0,0,0.2); */
 }
 
 .calendar-dropdown.top {
@@ -140,6 +139,10 @@
 .month-day.current {
   background: white;
   border: 1px solid orange;
+}
+
+.month-day.day-disabled {
+  color: rgba(70, 70, 70, 0.411);
 }
 
 .month-day.selected {

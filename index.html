@@ -40,13 +40,13 @@
                             Akceptowalne rozszerzenia:<br>
                             jpg, png, doc, docx, pdf<br>
                             <p id="nameFiles"></p>
-                            <button id="filesAddShow" class="changePayload grayFont">Prześlij plik</button>
-                            <input value="" type="file" id="filesAddHidden" hidden multiple>
+                            <button id="filesAddShow" class="changePayload grayFont" type="button">Prześlij plik</button>
+                            <input value="Prześlij plik" type="file" id="filesAddHidden" hidden multiple>
                         </div>
                         <h2 class="formHeader">Data przewozu</h2>
-                        <date-picker format="MMMM DD (DDD), YYYY" class="formContent"></date-picker>
+                        <date-picker format="MMMM DD (DDD), YYYY" class="formContent" id="datePicker"></date-picker>
                     </td>
-                    <td >
+                    <td>
                         <div>
                             <h2 class="formHeader">Ładunek</h2>
                             <table id="payloadTable" class="formContent">                             
@@ -57,7 +57,7 @@
                     </td>
                 </tr>
             </table>
-            <input value="Wyślij" type="submit" class="actionButton">
+            <input value="Wyślij" type="submit" id="submitButton" class="actionButton">
             <input value="Wyczyść" type="reset" class="actionButton">
         </form>
     </section>

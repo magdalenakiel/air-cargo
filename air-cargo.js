@@ -9,10 +9,10 @@ function addPayload() {
     const payloadTable = document.getElementById('payloadTable');
     let idNumber = payloadTable.rows.length
     const payloadRowHTML = `                       
-        <td><input name="cargoName${idNumber}" type="text" placeholder="Nazwa ładunku" required></td>
+        <td><input name="cargoName${idNumber}" type="text" placeholder="Nazwa ładunku"></td>
         <td><input name="loadWeight${idNumber}" type="text" placeholder="Ciężar ładunku [kg]" required></td>
         <td>
-            <select name="cargoType${idNumber}" id="selectPayloadType" required>
+            <select name="cargoType${idNumber}" id="selectPayloadType">
             <option value="" disabled selected class="grayFont">Typ ładunku</option>
             <option value="normalPayload">Zwykły</option>
             <option value="dangerousPayload">Niebezpieczny</option>
@@ -57,10 +57,8 @@ dropZone.addEventListener("drop", (event)=>{
 });
 function addFiles(files){
     var totalfiles = files.length
-    console.log(totalfiles)
     if(totalfiles > 0 ){
         for(let i = 0; totalfiles > i; i++){
-            console.log(files[i].name)
             addFilename(files[i])
         }
         printINDropZone();
@@ -111,11 +109,22 @@ function checkSize(){
     if(screen.width < 750)
     changePageLayout();
 }
-function checkData(e){
+
+function postSubmit(e){
+    var datePicker = document.getElementById("datePicker");
+    var form = document.getElementById("form")
+    value = document.getElementById("datePicker").date.format("MMM DD YYYY");
+    input = document.createElement('input');
+    input.setAttribute('name', 'chosenDate');
+    input.setAttribute('value', value);
+    input.setAttribute('type', 'hidden');
+    form.appendChild(input);
+    checkWeight(e, this);
+}
+function checkWeight(e, form){
     var sumLoad = 0;
-    var data = new FormData(this)
+    var data = new FormData(form)
     for (var [key, value] of data) {
-        console.log(key, value)
         if (key.startsWith("loadWeight")) {
             sumLoad += parseInt(value);
         }
@@ -128,7 +137,7 @@ function checkData(e){
 }
 addPayload();
 checkSize();
-document.getElementById("form").addEventListener("submit",checkData)
+document.getElementById("form").addEventListener("submit", postSubmit)
 document.getElementById('removePayload').addEventListener('click', removePayload);
 document.getElementById('addPayload').addEventListener('click', addPayload);
 window.addEventListener('resize', changePageLayout);
