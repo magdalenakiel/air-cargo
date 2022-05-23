@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="air-cargo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer="text/javascript" src="air-cargo.js"></script>
+    <script defer="text/javascript" src="dataPicker.js"></script>
+    <title>Air-cargo</title>
+</head>
+<body>
+    <div id="photoHeader">
+        <div id="headerBackground">
+            <span id="heading">Air-cargo</span><br>
+            <span id="pageSubtitle">Transport w locie</span>
+        </div>
+    </div>
+    <div id="orderPageTitle" class="centered">
+        Zlecenie na transport
+    </div>
+    <section class="centered">
+        <form id="form" action="." method="post" >
+            <table id="formTable">
+                <tr>
+                    <td id="firstFormTableColumn">
+                        <h2 class="formHeader">Trasa przewozu</h2>
+                        <div class="formContent">
+                            <input name="transportFrom" type="text" placeholder="Skąd" required><br>
+                            <input name="transportTo" type="text" placeholder="Dokąd" required><br>
+                            <select name="selectAirplane" id="selectAirplane" required>
+                                <option value="" disabled selected class="grayFont">Typ samolotu</option>
+                                <option value="35">Airbus A380</option>
+                                <option value="38">Boeing 747</option>
+                            </select>
+                        </div>
+                        <h2 class="formHeader">Dokumenty przewozowe</h2>
+                        <div class="dropZone formContent grayFont">
+                            Tutaj prześlij pliki przewozowe <br>
+                            Akceptowalne rozszerzenia:<br>
+                            jpg, png, doc, docx, pdf<br>
+                            <p id="nameFiles"></p>
+                            <button id="filesAddShow" class="changePayload grayFont" type="button">Prześlij plik</button>
+                            <input value="Prześlij plik" type="file" id="filesAddHidden" hidden multiple>
+                        </div>
+                        <h2 class="formHeader">Data przewozu</h2>
+                        <date-picker format="MMMM DD (DDD), YYYY" class="formContent" id="datePicker"></date-picker>
+                    </td>
+                    <td>
+                        <div>
+                            <h2 class="formHeader">Ładunek</h2>
+                            <table id="payloadTable" class="formContent">                             
+                            </table>     
+                        </div>
+                        <input value="+" type="button" id="addPayload" class="formContent grayFont changePayload"> 
+                        <input value="-" type="button" id="removePayload" class="grayFont changePayload">
+                    </td>
+                </tr>
+            </table>
+            <input value="Wyślij" type="submit" id="submitButton" class="actionButton">
+            <input value="Wyczyść" type="reset" class="actionButton">
+        </form>
+    </section>
+</body>
+</html>
