@@ -9,10 +9,10 @@ function addPayload() {
     const payloadTable = document.getElementById('payloadTable');
     let idNumber = payloadTable.rows.length
     const payloadRowHTML = `                       
-        <td><input name="nameCargo" type="text" placeholder="Nazwa ładunku" id="cargo${idNumber}" required></td>
-        <td><input name="loadWeight" type="text" placeholder="Ciężar ładunku [kg]" id="load${idNumber}" required></td>
+        <td><input name="cargoName${idNumber}" type="text" placeholder="Nazwa ładunku" required></td>
+        <td><input name="loadWeight${idNumber}" type="text" placeholder="Ciężar ładunku [kg]" required></td>
         <td>
-            <select name="loadType" id="type${idNumber}" id="selectPayloadType" required>
+            <select name="cargoType${idNumber}" id="selectPayloadType" required>
             <option value="" disabled selected class="grayFont">Typ ładunku</option>
             <option value="normalPayload">Zwykły</option>
             <option value="dangerousPayload">Niebezpieczny</option>
@@ -111,8 +111,24 @@ function checkSize(){
     if(screen.width < 750)
     changePageLayout();
 }
+function checkData(e){
+    var sumLoad = 0;
+    var data = new FormData(this)
+    for (var [key, value] of data) {
+        console.log(key, value)
+        if (key.startsWith("loadWeight")) {
+            sumLoad += parseInt(value);
+        }
+    }
+    var maxload = this.selectAirplane.value
+    if (sumLoad > maxload) {
+        alert(`Przekroczona maksymalna waga dla wybranego samolotu o ${sumLoad - maxload}\nMaksymalna waga: ${maxload}`)
+        e.preventDefault();
+    }
+}
 addPayload();
 checkSize();
+document.getElementById("form").addEventListener("submit",checkData)
 document.getElementById('removePayload').addEventListener('click', removePayload);
 document.getElementById('addPayload').addEventListener('click', addPayload);
 window.addEventListener('resize', changePageLayout);
