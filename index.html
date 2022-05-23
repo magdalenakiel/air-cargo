@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="air-cargo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer="text/javascript" src="air-cargo.js"></script>
+    <script defer="text/javascript" src="dataPicker.js"></script>
     <title>Air-cargo</title>
 </head>
 <body>
@@ -42,9 +43,9 @@
                             <p id="nameFiles"></p>
                             <button id="filesAddShow" class="changePayload grayFont">Prześlij plik</button>
                             <input value="" type="file" id="filesAddHidden" hidden multiple>
-                            
                         </div>
                         <h2 class="formHeader">Data przewozu</h2>
+                        <date-picker format="MMMM DD (DDD), YYYY" class="formContent"></date-picker>
                     </td>
                     <td>
                         <div>
