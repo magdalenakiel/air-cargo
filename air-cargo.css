@@ -41,8 +41,11 @@ input[type=reset]:hover {
 .dropZone{
     border: 3px lightgrey dashed;
     width:  80%;
-    height: 100px;
     padding: 12px;
+}
+.dropZone.active{
+    border: 3px orange solid;
+    background-color: rgba(255, 166, 0, 0.048);
 }
 .actionButton{
     width: 30%;
@@ -137,4 +140,10 @@ input[type=reset]:hover {
 #payloadTable tr{
     border-bottom: 2px dashed orange;
     display: block;
+}
+#nameFiles{
+    font-size: small;
+}
+#filesAddShow{
+    font-size: medium;
 }
