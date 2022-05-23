@@ -6,17 +6,19 @@ const buttonShow = document.getElementById('filesAddShow');
 var files = new Set();
 
 function addPayload() {
+    const payloadTable = document.getElementById('payloadTable');
+    let idNumber = payloadTable.rows.length
     const payloadRowHTML = `                       
-        <td><input name="nameCargo" type="text" placeholder="Nazwa ładunku" required></td>
-        <td><input name="loadWeight" type="text" placeholder="Ciężar ładunku [kg]" required></td>
+        <td><input name="nameCargo" type="text" placeholder="Nazwa ładunku" id="cargo${idNumber}" required></td>
+        <td><input name="loadWeight" type="text" placeholder="Ciężar ładunku [kg]" id="load${idNumber}" required></td>
         <td>
-            <select name="data" id="selectPayloadType" required>
+            <select name="loadType" id="type${idNumber}" id="selectPayloadType" required>
             <option value="" disabled selected class="grayFont">Typ ładunku</option>
             <option value="normalPayload">Zwykły</option>
             <option value="dangerousPayload">Niebezpieczny</option>
         </td>
     `
-    const payloadTable = document.getElementById('payloadTable');
+
     if (payloadTable.rows.length < 10) {
         var newRow = payloadTable.insertRow();
         newRow.innerHTML = payloadRowHTML;
@@ -68,8 +70,6 @@ function addFilename(separateFile){
     let fileType = pullFileExtensionFromName(separateFile)
     if(validExtensions.includes(fileType)){
         files.add(separateFile)
-        // nameText += `${separateFile.name}<br>`
-        // console.log(nameText)
     }else{
         alert("Plik nie posiada odpowiedzniego rozszerzenia. Akceptowalne rozszerzenia: jpg, png, doc, docx, pdf")
         dropZone.classList.remove("active");
@@ -79,10 +79,40 @@ function printINDropZone(){
     let filenamesStr = "";
     files.forEach(file => {
         filenamesStr += `${file.name}<br>`
-        console.log(file)
     });
     nameFiles.innerHTML = filenamesStr;
 }
+function changePageLayout(){
+    var table = document.getElementById('formTable');
+    if(screen.width < 750 && table.rows.length < 2){
+        const halfPageHTML = 
+        `
+        <div>
+        <h2 class="formHeader">Ładunek</h2>
+        <span id="table"></span>
+        </div>
+        <input value="+" type="button" id="addPayload" class="formContent grayFont changePayload"> 
+        <input value="-" type="button" id="removePayload" class="grayFont changePayload">
+        `;
+        const tableHTML = `<table id="payloadTable" class="formContent ">
+        </table>`
+        var table = document.getElementById('formTable');
+        table.rows[0].deleteCell(1);
+        var newRowPage = table.insertRow();
+        newRowPage.innerHTML = halfPageHTML;
+        document.getElementById('table').innerHTML = tableHTML;
+        addPayload();
+        };
+        if(screen.width > 750  &&  table.rows.length == 2){
+            location.reload();
+        }
+    }
+function checkSize(){
+    if(screen.width < 750)
+    changePageLayout();
+}
 addPayload();
+checkSize();
 document.getElementById('removePayload').addEventListener('click', removePayload);
 document.getElementById('addPayload').addEventListener('click', addPayload);
+window.addEventListener('resize', changePageLayout);
